@@ -17,6 +17,15 @@ def get_event_exchange(service_name):
 
     return exchange
 
+def get_event_bus_exchange():
+    """ Get an exchange for ``service_name`` events.
+    """
+    exchange_name = "nameko-event-bus"
+    exchange = Exchange(
+        exchange_name, type='topic', durable=True, auto_delete=True,
+        delivery_mode=PERSISTENT)
+
+    return exchange
 
 def event_dispatcher(**kwargs):
     """ Return a function that dispatches nameko events.
